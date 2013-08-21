@@ -4,7 +4,3 @@ default['postfix']['virtual_mailbox_domains'] = 'mysql:/etc/postfix/mysql-virtua
 default['postfix']['virtual_mailbox_maps'] = 'mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf'
 default['postfix']['virtual_alias_maps'] = 'mysql:/etc/postfix/mysql-virtual-alias-maps.cf'
 
-default['postfix']['database']['user'] = 'mailuser'
-default['postfix']['database']['password'] = '2FotkvaqE30jz0mSijSDbOxDorAcSxRaz3cZjNfALpT5Yoc5aSH5pZnJuXYzLyPG5JVeGEzOYE'
-default['postfix']['database']['hosts'] = '127.0.0.1'
-default['postfix']['database']['dbname'] = 'mailserver'

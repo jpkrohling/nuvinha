@@ -1,5 +1,5 @@
-user = <%= node['postfix']['database']['user']%>
-password = <%= node['postfix']['database']['password']%>
-hosts = <%= node['postfix']['database']['hosts']%>
-dbname = <%= node['postfix']['database']['dbname']%>
-query = SELECT 1 FROM virtual_users WHERE email='%s'
+user     = <%= node['mailserver']['database']['user']%>
+password = <%= node['mailserver']['database']['password']%>
+hosts    = <%= node['mailserver']['database']['hosts']%>
+dbname   = <%= node['mailserver']['database']['dbname']%>
+query    = SELECT 1 FROM virtual_users WHERE email='%s'
