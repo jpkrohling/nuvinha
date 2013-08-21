@@ -7,3 +7,4 @@
 .chef/encrypted_data_bag_secret
 .idea
 *.iml
+atlassian-ide-plugin.xml
