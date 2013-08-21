@@ -16,3 +16,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+package 'dovecot'
+package 'dovecot-pigeonhole'
+package 'dovecot-mysql'
+
+service 'dovecot' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
+template '/etc/dovecot/dovecot.conf' do
+  source 'dovecot.conf.erb'
+  notifies :restart, 'service[dovecot]'
+end
