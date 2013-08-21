@@ -1,0 +1,5 @@
+user = <%= node['postfix']['database']['user']%>
+password = <%= node['postfix']['database']['password']%>
+hosts = <%= node['postfix']['database']['hosts']%>
+dbname = <%= node['postfix']['database']['dbname']%>
+query = SELECT destination FROM virtual_aliases WHERE source='%s'
