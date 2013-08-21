@@ -16,6 +16,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
+node.set_unless['mariadb']['root_password'] = secure_password
 
 package 'mariadb-server'
 
+service 'mysqld' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
+execute 'assign-root-password' do
+  command "/usr/bin/mysqladmin -u root password \"#{node['mariadb']['root_password']}\""
+  action :run
+  only_if "/usr/bin/mysql -u root -e 'show databases;'"
+end
