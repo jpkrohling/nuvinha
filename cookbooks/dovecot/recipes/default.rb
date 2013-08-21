@@ -29,3 +29,10 @@ template '/etc/dovecot/dovecot.conf' do
   source 'dovecot.conf.erb'
   notifies :restart, 'service[dovecot]'
 end
+
+%w(10-ssl 15-lda 20-lmtp 20-managesieve 90-sieve).each do | file |
+  template "/etc/dovecot/conf.d/#{file}.conf" do
+    source "#{file}.conf.erb"
+    notifies :restart, 'service[dovecot]'
+  end
+end

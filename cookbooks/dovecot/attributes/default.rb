@@ -1,1 +1,1 @@
-default['dovecot']['protocols'] = 'imap lmtp sieve'
+default['dovecot']['protocols'] = 'imap lmtp'
