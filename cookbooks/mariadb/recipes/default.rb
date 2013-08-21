@@ -43,13 +43,13 @@ mysql_connection_info = {:host => 'localhost',
 
 mysql_database 'remove remote root' do
   connection mysql_connection_info
-  sql "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
+  sql "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
   action :query
 end
 
 mysql_database 'remove anonymous users' do
   connection mysql_connection_info
-  sql "DELETE FROM mysql.user WHERE User='';"
+  sql "DELETE FROM mysql.user WHERE User=''"
   action :query
 end
 
