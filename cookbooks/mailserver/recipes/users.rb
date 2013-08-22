@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mailserver
-# Recipe:: default
+# Recipe:: users
 #
 # Copyright 2013, kroehling.de
 #
@@ -16,7 +16,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe 'mailserver::database'
-include_recipe 'mailserver::users'
-include_recipe 'mailserver::certificate'
-include_recipe 'mailserver::storage'
+
+group node['mailserver']['vmail_group'] do
+	action :create
+end
+
+user node['mailserver']['vmail_user'] do
+	supports :manage_home => true
+	home node['mailserver']['storage_root']
+	gid node['mailserver']['vmail_group']
+	action :create
+end
