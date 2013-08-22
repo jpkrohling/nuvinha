@@ -16,3 +16,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+package 'opendkim'
+
+execute '/usr/sbin/opendkim-default-keygen' do
+	user 'root'
+	not_if { ::File.exists?('/etc/opendkim/keys/default.private') }
+end
+
+execute 'reload_systemctl' do
+	command 'systemctl --system daemon-reload'
+	user 'root'
+	action :nothing
+end
+
+service 'opendkim' do
+	supports :status => true, :restart => true, :reload => true
+	action :enable
+end
+
+template '/lib/systemd/system/opendkim.service' do
+	source 'opendkim.service.erb'
+	notifies :run, 'execute[reload_systemctl]', :immediately
+	notifies :restart, 'service[opendkim]'
+end
+
