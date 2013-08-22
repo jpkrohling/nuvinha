@@ -43,29 +43,35 @@ mysql_connection_info = {:host => 'localhost',
 
 mysql_database 'remove remote root' do
   connection mysql_connection_info
-  sql "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
+	database_name 'mysql'
+  sql "DELETE FROM user WHERE user='root' AND host NOT IN ('localhost', '127.0.0.1', '::1')"
   action :query
 end
 
 mysql_database 'remove anonymous users' do
   connection mysql_connection_info
-  sql "DELETE FROM mysql.user WHERE User=''"
+	database_name 'mysql'
+  sql "DELETE FROM user WHERE user=''"
   action :query
 end
 
-mysql_database 'test' do
-  connection mysql_connection_info
-  action :drop
+mysql_database 'drop test database' do
+	connection mysql_connection_info
+	database_name 'mysql'
+	sql "DROP DATABASE IF EXISTS test"
+	action :query
 end
 
 mysql_database 'remove test database' do
   connection mysql_connection_info
-  sql "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
+	database_name 'mysql'
+  sql "DELETE FROM db WHERE db='test' OR db='test\\_%'"
   action :query
 end
 
 mysql_database 'flush_privileges' do
   connection mysql_connection_info
+	database_name 'mysql'
   sql 'flush privileges'
   action :query
 end

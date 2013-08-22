@@ -74,7 +74,7 @@ mysql_database_user node['mailserver']['database']['user'] do
 	connection mysql_connection_info
 	password node['mailserver']['database']['password']
 	database_name node['mailserver']['database']['dbname']
-	host '%'
+	host 'localhost'
 	privileges [:select,:update,:insert]
 	action :grant
 end
