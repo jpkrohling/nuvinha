@@ -38,3 +38,7 @@ end
 link '/etc/alternatives/mta' do
 	to '/usr/sbin/sendmail.postfix'
 end
+
+link '/etc/alternatives/mta-sendmail' do
+	to '/usr/sbin/sendmail.postfix'
+end
