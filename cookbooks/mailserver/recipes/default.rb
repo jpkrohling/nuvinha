@@ -22,12 +22,12 @@ node.set_unless['mailserver']['database']['password'] = secure_password
 node.save
 
 mysql_connection_info = {:host => 'localhost',
-                         :username => 'root',
-                         :password => node['mariadb']['root_password']}
+												 :username => 'root',
+												 :password => node['mariadb']['root_password']}
 
 mysql_database node['mailserver']['database']['dbname'] do
-  connection mysql_connection_info
-  action :create
+	connection mysql_connection_info
+	action :create
 end
 
 mysql_database 'create domains table' do
