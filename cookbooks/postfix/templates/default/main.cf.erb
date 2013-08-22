@@ -72,7 +72,7 @@ mail_owner = postfix
 # from gethostname(). $myhostname is used as a default value for many
 # other configuration parameters.
 #
-myhostname = <%= node['postfix']['myhostname'] %>
+myhostname = <%= node['fqdn'] %>
 #myhostname = virtual.domain.tld
 
 # The mydomain parameter specifies the local internet domain name.
@@ -464,7 +464,7 @@ recipient_delimiter = <%= node['mailserver']['recipient_delimiter'] %>
 #
 # Cyrus IMAP over LMTP. Specify ``lmtpunix      cmd="lmtpd"
 # listen="/var/imap/socket/lmtp" prefork=0'' in cyrus.conf.
-mailbox_transport = lmtp:unix:/var/lib/imap/socket/lmtp
+mailbox_transport = lmtp:unix:/var/run/dovecot/lmtp
 
 # If using the cyrus-imapd IMAP server deliver local mail to the IMAP
 # server using LMTP (Local Mail Transport Protocol), this is prefered

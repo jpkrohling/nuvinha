@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mailserver
-# Recipe:: default
+# Recipe:: certificate
 #
 # Copyright 2013, kroehling.de
 #
@@ -16,6 +16,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe 'mailserver::database'
-include_recipe 'mailserver::certificate'
-include_recipe 'mailserver::storage'
+
+x509_certificate "#{node['fqdn']}" do
+	ca node['x509']['ca']
+	certificate node['mailserver']['cert']['cert']
+	key node['mailserver']['cert']['key']
+	bits 4096
+	days 365
+end
