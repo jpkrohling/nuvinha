@@ -13,6 +13,7 @@ run_list(
 )
 
 default_attributes(
+		:set_fqdn => '*.kroehling.de',
 		:build_essential => {
 				:compiletime => true
 		}
