@@ -679,6 +679,8 @@ sample_directory = /usr/share/doc/postfix-2.10.1/samples
 readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES
 
 smtpd_recipient_restrictions = <%= node['postfix']['smtpd_recipient_restrictions'] %>
+
+virtual_transport = lmtp:unix:/var/run/dovecot/lmtp
 virtual_mailbox_domains = <%= node['postfix']['virtual_mailbox_domains'] %>
 virtual_mailbox_maps = <%= node['postfix']['virtual_mailbox_maps'] %>
 virtual_alias_maps = <%= node['postfix']['virtual_alias_maps'] %>
