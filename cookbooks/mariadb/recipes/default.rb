@@ -26,33 +26,33 @@ resources('package[mariadb-devel]').run_action(:install)
 chef_gem 'mysql'
 
 service 'mysqld' do
-  supports :status => true, :restart => true, :reload => true
-  action [:enable, :start]
+	supports :status => true, :restart => true, :reload => true
+	action [:enable, :start]
 end
 
 execute 'assign-root-password' do
-  command "/usr/bin/mysqladmin -u root password \"#{node['mariadb']['root_password']}\""
-  action :run
-  notifies :restart, 'service[mysqld]'
-  only_if "/usr/bin/mysql -u root -e 'show databases;'"
+	command "/usr/bin/mysqladmin -u root password \"#{node['mariadb']['root_password']}\""
+	action :run
+	notifies :restart, 'service[mysqld]'
+	only_if "/usr/bin/mysql -u root -e 'show databases;'"
 end
 
 mysql_connection_info = {:host => 'localhost',
-                         :username => 'root',
-                         :password => node['mariadb']['root_password']}
+												 :username => 'root',
+												 :password => node['mariadb']['root_password']}
 
 mysql_database 'remove remote root' do
-  connection mysql_connection_info
+	connection mysql_connection_info
 	database_name 'mysql'
-  sql "DELETE FROM user WHERE user='root' AND host NOT IN ('localhost', '127.0.0.1', '::1')"
-  action :query
+	sql "DELETE FROM user WHERE user='root' AND host NOT IN ('localhost', '127.0.0.1', '::1')"
+	action :query
 end
 
 mysql_database 'remove anonymous users' do
-  connection mysql_connection_info
+	connection mysql_connection_info
 	database_name 'mysql'
-  sql "DELETE FROM user WHERE user=''"
-  action :query
+	sql "DELETE FROM user WHERE user=''"
+	action :query
 end
 
 mysql_database 'drop test database' do
@@ -63,16 +63,16 @@ mysql_database 'drop test database' do
 end
 
 mysql_database 'remove test database' do
-  connection mysql_connection_info
+	connection mysql_connection_info
 	database_name 'mysql'
-  sql "DELETE FROM db WHERE db='test' OR db='test\\_%'"
-  action :query
+	sql "DELETE FROM db WHERE db='test' OR db='test\\_%'"
+	action :query
 end
 
 mysql_database 'flush_privileges' do
-  connection mysql_connection_info
+	connection mysql_connection_info
 	database_name 'mysql'
-  sql 'flush privileges'
-  action :query
+	sql 'flush privileges'
+	action :query
 end
 
