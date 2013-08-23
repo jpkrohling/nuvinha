@@ -25,11 +25,16 @@ service 'dovecot' do
 	action [:enable, :start]
 end
 
-%w(auth-sql.conf.ext dovecot.conf dovecot-sql.conf.ext).each do | file |
+%w(dovecot.conf dovecot-sql.conf.ext).each do | file |
 	template "/etc/dovecot/#{file}" do
 		source "#{file}.erb"
 		notifies :restart, 'service[dovecot]'
 	end
+end
+
+template '/etc/dovecot/conf.d/auth-sql.conf.ext' do
+	source 'auth-sql.conf.ext.erb'
+	notifies :restart, 'service[dovecot]'
 end
 
 %w(10-auth 10-mail 10-master 10-ssl 15-lda 20-lmtp 20-managesieve 90-sieve).each do | file |
