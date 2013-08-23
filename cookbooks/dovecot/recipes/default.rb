@@ -37,7 +37,7 @@ template '/etc/dovecot/conf.d/auth-sql.conf.ext' do
 	notifies :restart, 'service[dovecot]'
 end
 
-%w(10-auth 10-mail 10-master 10-ssl 15-lda 20-lmtp 20-managesieve 90-sieve).each do | file |
+%w(10-auth 10-mail 10-master 10-ssl 15-lda 20-imap 20-lmtp 20-managesieve 90-sieve).each do | file |
 	template "/etc/dovecot/conf.d/#{file}.conf" do
 		source "#{file}.conf.erb"
 		notifies :restart, 'service[dovecot]'
