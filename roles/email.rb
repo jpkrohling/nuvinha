@@ -3,6 +3,7 @@ description 'Email server'
 run_list(
 		'recipe[hostname]',
 		'recipe[build-essential]',
+		'recipe[openssl]',
 		'recipe[x509]',
 		'recipe[base]',
 		'recipe[mariadb]',

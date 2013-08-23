@@ -17,3 +17,14 @@
 # limitations under the License.
 #
 
+%w(openssl-1.0.1e-5.fc19.x86_64.rpm openssl-libs-1.0.1e-5.fc19.x86_64.rpm openssl-devel-1.0.1e-5.fc19.x86_64.rpm).each do | file |
+	cookbook_file file do
+		backup false
+		path "/tmp/#{file}"
+		action :create_if_missing
+	end
+end
+
+execute 'yum install -y /tmp/openssl*.rpm' do
+	not_if 'test $(rpm -q openssl) = "openssl-1.0.1e-5.fc19.x86_64"'
+end
