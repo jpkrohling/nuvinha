@@ -11,6 +11,7 @@ run_list(
 		'recipe[postfix]',
 		'recipe[dovecot]',
 		'recipe[opendkim]',
+		'recipe[apache]',
 		'recipe[roundcube]',
 )
 

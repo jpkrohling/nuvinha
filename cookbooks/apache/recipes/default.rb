@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: roundcube
+# Cookbook Name:: apache
 # Recipe:: default
 #
 # Copyright 2013, kroehling.de
@@ -17,4 +17,18 @@
 # limitations under the License.
 #
 
-package 'roundcubemail'
+package 'httpd'
+package 'mod_ssl'
+
+service 'httpd' do
+	supports :status => true, :restart => true, :reload => true
+	action [:enable, :start]
+end
+
+%w(ssl ssl-only).each do | file |
+	template "/etc/httpd/conf.d/#{file}.conf" do
+		source "#{file}.conf.erb"
+		notifies :restart, 'service[httpd]'
+	end
+end
+
