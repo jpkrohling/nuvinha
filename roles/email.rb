@@ -13,6 +13,7 @@ run_list(
 		'recipe[dovecot]',
 		'recipe[opendkim]',
 		'recipe[apache]',
+		'recipe[php]',
 		'recipe[roundcube]',
 )
 

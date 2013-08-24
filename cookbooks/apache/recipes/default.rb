@@ -38,7 +38,7 @@ end
 %w(ssl ssl-only).each do | file |
 	template "/etc/httpd/conf.d/#{file}.conf" do
 		source "#{file}.conf.erb"
-		notifies :restart, 'service[httpd]'
+		notifies :reload, 'service[httpd]'
 	end
 end
 
