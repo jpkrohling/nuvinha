@@ -17,8 +17,18 @@
 # limitations under the License.
 #
 
-package 'httpd'
-package 'mod_ssl'
+%w(httpd-2.4.6-3.fc19.x86_64.rpm httpd-tools-2.4.6-3.fc19.x86_64.rpm mod_ssl-2.4.6-3.fc19.x86_64.rpm).each do | file |
+	cookbook_file file do
+		backup false
+		path "/tmp/#{file}"
+		action :create_if_missing
+	end
+end
+
+# dirty hack, as all of these packages needs to be installed together, due to the dependencies
+execute 'yum install -y /tmp/httpd*.rpm /tmp/mod_*.rpm' do
+	not_if 'test $(rpm -q httpd) = "httpd-2.4.6-3.fc19.x86_64"'
+end
 
 service 'httpd' do
 	supports :status => true, :restart => true, :reload => true

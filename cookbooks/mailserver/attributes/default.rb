@@ -1,5 +1,5 @@
 default['mailserver']['recipient_delimiter'] = '.'
-default['mailserver']['ssl_cipher_list'] = 'ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH'
+default['mailserver']['ssl_cipher_list'] = 'EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH:EDH+aRSA:RC4:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS'
 default['mailserver']['database']['user'] = 'mailuser'
 #default['mailserver']['database']['password'] = set it on the recipe, with a random value
 default['mailserver']['database']['hosts'] = '127.0.0.1'

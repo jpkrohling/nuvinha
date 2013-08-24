@@ -25,6 +25,8 @@
 	end
 end
 
+# dirty hack, as both needs to be installed at the same time, otherwise, we could just install via the package
+# resource.
 execute 'yum install -y /tmp/openssl*.rpm' do
 	not_if 'test $(rpm -q openssl) = "openssl-1.0.1e-5.fc19.x86_64"'
 end
