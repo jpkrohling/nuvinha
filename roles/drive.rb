@@ -1,5 +1,5 @@
-name 'email'
-description 'Email server'
+name 'drive'
+description 'Cloud drive server'
 run_list(
 		'recipe[hostname]',
 		'recipe[build-essential]',
@@ -11,11 +11,7 @@ run_list(
 		'recipe[apache]',
 		'recipe[php]',
 		'recipe[newrelic]',
-		'recipe[mailserver]',
-		'recipe[postfix]',
-		'recipe[dovecot]',
-		'recipe[opendkim]',
-		'recipe[roundcube]',
+		'recipe[owncloud]',
 )
 
 default_attributes(
