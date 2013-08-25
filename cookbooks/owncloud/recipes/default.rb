@@ -43,10 +43,6 @@ mysql_database_user node['owncloud']['database']['user'] do
 	action :grant
 end
 
-template '/etc/owncloud/config.php' do
-	source 'config.php.erb'
-end
-
 template '/etc/httpd/conf.d/owncloud.conf' do
 	source 'owncloud.conf.erb'
 	notifies :reload, 'service[httpd]'

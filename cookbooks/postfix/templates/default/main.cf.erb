@@ -685,8 +685,8 @@ virtual_mailbox_domains = <%= node['postfix']['virtual_mailbox_domains'] %>
 virtual_mailbox_maps = <%= node['postfix']['virtual_mailbox_maps'] %>
 virtual_alias_maps = <%= node['postfix']['virtual_alias_maps'] %>
 
-smtpd_tls_cert_file=<%= node['mailserver']['cert']['cert'] %>
-smtpd_tls_key_file=<%= node['mailserver']['cert']['key'] %>
+smtpd_tls_cert_file=<%= node['base']['cert']['cert'] %>
+smtpd_tls_key_file=<%= node['base']['cert']['key'] %>
 smtpd_use_tls=yes
 smtpd_tls_auth_only = yes
 

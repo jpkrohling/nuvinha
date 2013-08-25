@@ -79,7 +79,7 @@ SSLProtocol all -SSLv2 -SSLv3
 #   List the ciphers that the client is permitted to negotiate.
 #   See the mod_ssl documentation for a complete list.
 #SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5
-SSLCipherSuite <%= node['mailserver']['ssl_cipher_list'] %>
+SSLCipherSuite <%= node['base']['ssl_cipher_list'] %>
 
 #   Speed-optimized SSL Cipher configuration:
 #   If speed is your main concern (on busy HTTPS servers e.g.),
@@ -100,14 +100,14 @@ SSLHonorCipherOrder on
 # the certificate is encrypted, then you will be prompted for a
 # pass phrase.  Note that a kill -HUP will prompt again.  A new
 # certificate can be generated using the genkey(1) command.
-SSLCertificateFile <%= node['mailserver']['cert']['cert'] %>
+SSLCertificateFile <%= node['base']['cert']['cert'] %>
 
 #   Server Private Key:
 #   If the key is not combined with the certificate, use this
 #   directive to point at the key file.  Keep in mind that if
 #   you've both a RSA and a DSA private key you can configure
 #   both in parallel (to also allow the use of DSA ciphers, etc.)
-SSLCertificateKeyFile <%= node['mailserver']['cert']['key'] %>
+SSLCertificateKeyFile <%= node['base']['cert']['key'] %>
 
 #   Server Certificate Chain:
 #   Point SSLCertificateChainFile at a file containing the

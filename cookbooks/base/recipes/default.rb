@@ -18,3 +18,11 @@
 #
 
 package 'screen'
+
+x509_certificate "#{node['fqdn']}" do
+	ca node['x509']['ca']
+	certificate node['base']['cert']['cert']
+	key node['base']['cert']['key']
+	bits 4096
+	days 365
+end

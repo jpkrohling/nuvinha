@@ -11,8 +11,8 @@ ssl = required
 # dropping root privileges, so keep the key file unreadable by anyone but
 # root. Included doc/mkcert.sh can be used to easily generate self-signed
 # certificate, just make sure to update the domains in dovecot-openssl.cnf
-ssl_cert = <<%= node['mailserver']['cert']['cert'] %>
-ssl_key = <<%= node['mailserver']['cert']['key'] %>
+ssl_cert = <<%= node['base']['cert']['cert'] %>
+ssl_key = <<%= node['base']['cert']['key'] %>
 
 # If key file is password protected, give the password here. Alternatively
 # give it when starting dovecot with -p parameter. Since this file is often
@@ -53,7 +53,7 @@ ssl_key = <<%= node['mailserver']['cert']['key'] %>
 #ssl_protocols = !SSLv2
 
 # SSL ciphers to use
-ssl_cipher_list = <%= node['mailserver']['ssl_cipher_list'] %>
+ssl_cipher_list = <%= node['base']['ssl_cipher_list'] %>
 
 # SSL crypto device to use, for valid values run "openssl engine"
 #ssl_crypto_device =

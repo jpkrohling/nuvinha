@@ -18,5 +18,4 @@
 #
 include_recipe 'mailserver::database'
 include_recipe 'mailserver::users'
-include_recipe 'mailserver::certificate'
 include_recipe 'mailserver::storage'
