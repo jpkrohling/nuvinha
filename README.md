@@ -146,6 +146,7 @@ the contents from your existing file. Same for the file in `private`, replacing 
 already, you can find the CSR on the node's property on the chef web interface, under the property `csr_outbox`. Once you get the 
 signed certificate, use the [`chef-ssl`](http://community.opscode.com/cookbooks/x509) utility to update your node. 
 - Populate the database for the database users:
+
 ```sql
 INSERT INTO `mailserver`.`virtual_domains`
   (`name`)
@@ -162,6 +163,7 @@ INSERT INTO `mailserver`.`virtual_aliases`
 VALUES
   ('5', 'alias@newdomain.com', 'myemail@gmail.com');
 ```
+
 - Populate the Roundcube database: `mysql -u root -p roundcube < /usr/share/doc/roundcubemail-0.9.2/SQL/mysql.initial.sql`
 - Run the ownCloud setup at: https://mail.DOMAIN.TLD/owncloud . For the initial setup, you'll need this:
 `GRANT ALL PRIVILEGES ON owncloud.* TO 'owncloud'@'localhost' IDENTIFIED BY 'password';`. You can get MySQL's root password
