@@ -12,7 +12,6 @@ which contains the necessary recipes to run your own cloud services.
 - Apache with PHP and SSL
 - Automatic SSL certificates and CSR creation
 - Postfix and Dovecot integrated with MariaDB
-- OpenDKIM
 - Roundcube
 - Auto-provisioning of EBS volume for mail storage
 
@@ -20,9 +19,12 @@ which contains the necessary recipes to run your own cloud services.
 
 - ownCloud with automatic provision of EBS volume for storage
 - New Relic monitoring
+- Accept emails only via secure means (ie: SSL or with STARTTLS). It is enabled by default, 
+and you might want to disable it for maximum compatibility with other servers (see the `postfix` recipe).
 
 ## Roadmap
 
+- OpenDKIM
 - EBS provisioning for MariaDB data
 - Detecting if the deployment is being made on EC2 and skip the EBS provisioning if it's not EC2
 - OpenLDAP for account information storage and integration with Postfix, Dovecot and ownCloud
@@ -146,6 +148,7 @@ the contents from your existing file. Same for the file in `private`, replacing 
 already, you can find the CSR on the node's property on the chef web interface, under the property `csr_outbox`. Once you get the 
 signed certificate, use the [`chef-ssl`](http://community.opscode.com/cookbooks/x509) utility to update your node. 
 - Populate the database for the database users:
+
 ```sql
 INSERT INTO `mailserver`.`virtual_domains`
   (`name`)
@@ -162,6 +165,7 @@ INSERT INTO `mailserver`.`virtual_aliases`
 VALUES
   ('5', 'alias@newdomain.com', 'myemail@gmail.com');
 ```
+
 - Populate the Roundcube database: `mysql -u root -p roundcube < /usr/share/doc/roundcubemail-0.9.2/SQL/mysql.initial.sql`
 - Run the ownCloud setup at: https://mail.DOMAIN.TLD/owncloud . For the initial setup, you'll need this:
 `GRANT ALL PRIVILEGES ON owncloud.* TO 'owncloud'@'localhost' IDENTIFIED BY 'password';`. You can get MySQL's root password
