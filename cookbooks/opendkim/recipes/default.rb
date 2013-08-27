@@ -34,6 +34,11 @@ service 'opendkim' do
 	action :enable
 end
 
+template '/etc/opendkim.conf' do
+	source 'opendkim.conf.erb'
+	notifies :restart, 'service[opendkim]'
+end
+
 template '/lib/systemd/system/opendkim.service' do
 	source 'opendkim.service.erb'
 	notifies :run, 'execute[reload_systemctl]', :immediately

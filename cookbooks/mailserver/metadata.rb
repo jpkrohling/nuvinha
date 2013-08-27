@@ -8,4 +8,5 @@ version          '0.1.0'
 
 depends 'aws'
 depends 'openssl'
+depends 'swap'
 depends 'x509'

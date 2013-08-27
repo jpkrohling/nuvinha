@@ -698,3 +698,8 @@ smtpd_enforce_tls = <%= node['postfix']['smtpd_enforce_tls'] %>
 smtp_enforce_tls = <%= node['postfix']['smtp_enforce_tls'] %>
 smtpd_tls_security_level = <%= node['postfix']['smtpd_tls_security_level'] %>
 smtp_tls_security_level = <%= node['postfix']['smtp_tls_security_level'] %>
+
+milter_default_action = accept
+milter_protocol = 2
+smtpd_milters = inet:localhost:8891
+non_smtpd_milters = inet:localhost:8891

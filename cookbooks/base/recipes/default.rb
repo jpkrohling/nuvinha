@@ -18,6 +18,7 @@
 #
 
 package 'screen'
+package 'which'
 
 x509_certificate "#{node['fqdn']}" do
 	ca node['x509']['ca']
