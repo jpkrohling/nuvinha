@@ -12,7 +12,6 @@ which contains the necessary recipes to run your own cloud services.
 - Apache with PHP and SSL
 - Automatic SSL certificates and CSR creation
 - Postfix and Dovecot integrated with MariaDB
-- OpenDKIM
 - Roundcube
 - Auto-provisioning of EBS volume for mail storage
 
@@ -25,6 +24,7 @@ and you might want to disable it for maximum compatibility with other servers (s
 
 ## Roadmap
 
+- OpenDKIM
 - EBS provisioning for MariaDB data
 - Detecting if the deployment is being made on EC2 and skip the EBS provisioning if it's not EC2
 - OpenLDAP for account information storage and integration with Postfix, Dovecot and ownCloud
