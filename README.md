@@ -20,6 +20,8 @@ which contains the necessary recipes to run your own cloud services.
 
 - ownCloud with automatic provision of EBS volume for storage
 - New Relic monitoring
+- Accept emails only via secure means (ie: SSL or with STARTTLS). It is enabled by default, 
+and you might want to disable it for maximum compatibility with other servers (see the `postfix` recipe).
 
 ## Roadmap
 
