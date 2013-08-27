@@ -25,7 +25,7 @@ package 'mariadb-devel'
 resources('package[mariadb-devel]').run_action(:install)
 chef_gem 'mysql'
 
-include_recipe 'owncloud::storage'
+include_recipe 'mariadb::storage'
 
 service 'mysqld' do
 	supports :status => true, :restart => true, :reload => true
