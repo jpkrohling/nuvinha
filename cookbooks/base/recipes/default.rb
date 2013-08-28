@@ -19,6 +19,7 @@
 
 package 'screen'
 package 'which'
+package 'ntpdate'
 
 x509_certificate "#{node['fqdn']}" do
 	ca node['x509']['ca']
