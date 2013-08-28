@@ -20,6 +20,8 @@
 package 'screen'
 package 'which'
 package 'ntpdate'
+package 'fortune-mod'
+package 'cowsay'
 
 x509_certificate "#{node['fqdn']}" do
 	ca node['x509']['ca']
@@ -32,4 +34,10 @@ end
 swap_file '/mnt/swap' do
 	size node['base']['swap_size']
 	persist true
+end
+
+%w(cowsay ps1).each do | file |
+	template "/etc/profile.d/#{file}.sh" do
+		source "#{file}.sh.erb"
+	end
 end
