@@ -16,6 +16,7 @@ run_list(
 		'recipe[dovecot]',
 		'recipe[opendkim]',
 		'recipe[roundcube]',
+		'recipe[newrelic]',
 )
 
 default_attributes(

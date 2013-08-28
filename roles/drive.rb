@@ -12,6 +12,7 @@ run_list(
 		'recipe[apache]',
 		'recipe[php]',
 		'recipe[owncloud]',
+		'recipe[newrelic]',
 )
 
 default_attributes(
@@ -29,12 +30,12 @@ default_attributes(
 		},
 		:newrelic => {
 				:server_monitoring => {
-						:ssl => true
-						# :license => 'REPLACE_WITH_YOUR_KEY' ## set it directly on chef server
+						:ssl => true,
+						# :license => 'REPLACE_WITH_YOUR_KEY' ## set it before running the newrelic recipe
 				},
 				:application_monitoring => {
-						:ssl => true
-						# :license => 'REPLACE_WITH_YOUR_KEY' ## set it directly on chef server
+						:ssl => true,
+						# :license => 'REPLACE_WITH_YOUR_KEY' ## set it before running the newrelic recipe
 				}
 		},
 )
