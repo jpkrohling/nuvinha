@@ -5,6 +5,7 @@ run_list(
 		'recipe[build-essential]',
 		'recipe[openssl]',
 		'recipe[x509]',
+		'recipe[chef-client]',
 		'recipe[base]',
 		'recipe[mariadb]',
 		'recipe[iptables]',

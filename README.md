@@ -155,10 +155,10 @@ VALUES
 INSERT INTO `mailserver`.`virtual_aliases`
   (`domain_id`, `source`, `destination`)
 VALUES
-  ('5', 'alias@newdomain.com', 'myemail@gmail.com');
+  ('1', 'alias@newdomain.com', 'myemail@gmail.com');
 ```
 
-- Populate the Roundcube database: `mysql -u root -p roundcube < /usr/share/doc/roundcubemail-0.9.2/SQL/mysql.initial.sql`
+- Populate the Roundcube database: `mysql -h 127.0.0.1 -u root -p roundcube < /usr/share/doc/roundcubemail-0.9.2/SQL/mysql.initial.sql`
 - Run the ownCloud setup at: https://mail.DOMAIN.TLD/owncloud . For the initial setup, you'll need this:
 `GRANT ALL PRIVILEGES ON owncloud.* TO 'owncloud'@'localhost' IDENTIFIED BY 'password';`. You can get MySQL's root password
 on the node's properties on chef, under the property `mariadb/root_password`. You can get ownCloud's DB password on the 
