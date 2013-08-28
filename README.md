@@ -18,14 +18,14 @@ which contains the necessary recipes to run your own cloud services.
 ### Optional features
 
 - ownCloud with automatic provision of EBS volume for storage
-- New Relic monitoring
+- New Relic server monitoring
 - Accept emails only via secure means (ie: SSL or with STARTTLS). It is enabled by default, 
 and you might want to disable it for maximum compatibility with other servers (see the `postfix` recipe).
 
 ## Roadmap
 
 - OpenDKIM
-- EBS provisioning for MariaDB data
+- New Relic application monitoring
 - Detecting if the deployment is being made on EC2 and skip the EBS provisioning if it's not EC2
 - OpenLDAP for account information storage and integration with Postfix, Dovecot and ownCloud
 - Jabber server
@@ -105,9 +105,7 @@ openssl-1.0.1e-5.fc19.x86_64.rpm
 openssl-devel-1.0.1e-5.fc19.x86_64.rpm
 openssl-libs-1.0.1e-5.fc19.x86_64.rpm
 ```
-- Next is to change the `email` role and comment out everything after the `base` recipe. This way, you have a quick boot
-and we can add recipes one at a time. This is required if you are using a t1.micro instance, as the initial bootstrap
-from chef can consume a lot of memory, causing a "Cannot allocate memory". 
+
 - Now, upload all cookbooks and roles: 
 
 ```bash
@@ -117,7 +115,7 @@ $ knife role from file roles/*rb
 - And finally, bootstrap an instance: 
 
 ```bash
-$ knife ec2 server create -I ami-f1031e85 -g ssh-bastion,default,web-server,mail-server -x fedora -f t1.micro -r "role[email]" -N mail
+$ knife ec2 server create -I ami-f1031e85 -g ssh-bastion,default,web-server,mail-server -x fedora -f t1.micro --ebs-size 10 -r "role[email]" -N mail
 ```
 
 What this command does is:
@@ -126,7 +124,7 @@ What this command does is:
 * With a Fedora 19 x86_64 AMI (ami-f1031e85)
 * Under the security groups "ssh-bastion,default,web-server,mail-server"
 * Logging in as the `fedora` user
-* On a t1.micro instance
+* On a t1.micro instance with a 10GB EBS root device
 * Applying the role `email` to it
 * And naming it `mail`. This name will appear on EC2 console, on Opscode's Hosted Chef and will be used as the host 
 part of the FQDN (ie: mail.yourdomain.tld). 
@@ -136,13 +134,7 @@ be better protected against known security vulnerabilities. Once you finish the 
 as there will probably be a kernel update. 
 
 - After the reboot, run the chef-client manually once, so that it sets up the hostname properly: `$ sudo chef-client --once`. 
-- Uncomment one recipe from the role `email`, upload the role to the chef server with `knife role from file roles/email.rb` and 
-run `sudo chef-client --once` .
-- Repeat the same steps for each of the recipes. 
-- Note that the recipe `roundcube` might fail when enabling a selinux boolean. Unfortunately, I wasn't able to see why chef fails, 
-and why it always works manually. So, to avoid problems, run this command before the first execution of the `roundcube` cookbook
-(ie: before you uncomment it from the role): `sudo /usr/sbin/setsebool -P httpd_can_network_connect on`.
-- Once you finish all the recipes, you should have some certificates on `/etc/pki/tls/certs` and `/etc/pki/tls/private`, named 
+- Once it finishes, you should have some certificates on `/etc/pki/tls/certs` and `/etc/pki/tls/private`, named
 mail.YOURDOMAIN.TLD. If you already have your certificate, just replace the contents of the certificate from `certs` with 
 the contents from your existing file. Same for the file in `private`, replacing it with your key. If you don't have a certificate
 already, you can find the CSR on the node's property on the chef web interface, under the property `csr_outbox`. Once you get the 
@@ -172,3 +164,4 @@ VALUES
 on the node's properties on chef, under the property `mariadb/root_password`. You can get ownCloud's DB password on the 
 property `owncloud/database/password`. 
 - You should now be ready :-) Enjoy! 
+- If you want ownCloud, add this role to the node on the Chef server web interface and run `sudo chef-client --once`

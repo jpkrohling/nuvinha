@@ -27,3 +27,8 @@ x509_certificate "#{node['fqdn']}" do
 	bits 4096
 	days 365
 end
+
+swap_file '/mnt/swap' do
+	size node['base']['swap_size']
+	persist true
+end

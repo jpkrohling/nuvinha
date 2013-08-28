@@ -8,4 +8,3 @@ default['mailserver']['storage_root'] = '/var/spool/mail'
 default['mailserver']['storage_path'] = "#{node['mailserver']['storage_root']}/vhosts"
 default['mailserver']['vmail_user'] = 'vmail'
 default['mailserver']['vmail_group'] = 'vmail'
-default['mailserver']['swap_size'] = 1024 # MBs

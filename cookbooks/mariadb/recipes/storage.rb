@@ -40,17 +40,17 @@ bash 'create_filesystem' do
 	not_if 'parted /dev/xvdk print | grep ext4'
 end
 
-directory '/var/lib/mysql' do
-	owner 'mysql'
-	group 'mysql'
-	mode '0750'
-	recursive true
-end
-
 mount '/var/lib/mysql' do
 	device '/dev/xvdk1'
 	options 'rw noatime'
 	fstype 'ext4'
 	action [ :enable, :mount ]
 	not_if 'cat /proc/mounts | grep /var/lib/mysql'
+end
+
+directory '/var/lib/mysql' do
+	owner 'mysql'
+	group 'mysql'
+	mode '0750'
+	recursive true
 end
