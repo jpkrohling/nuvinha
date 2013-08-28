@@ -10,7 +10,6 @@ run_list(
 		'recipe[iptables]',
 		'recipe[apache]',
 		'recipe[php]',
-		'recipe[newrelic]',
 		'recipe[mailserver]',
 		'recipe[postfix]',
 		'recipe[dovecot]',
