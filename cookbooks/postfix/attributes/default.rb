@@ -1,3 +1,4 @@
+default['iptables']['open_ports'] << [25, 465]
 default['postfix']['myhostname'] = 'mail.kroehling.de'
 default['postfix']['smtpd_recipient_restrictions'] = 'permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination'
 default['postfix']['virtual_mailbox_domains'] = 'mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf'
