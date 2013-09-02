@@ -8,6 +8,6 @@ default['postfix']['virtual_alias_maps'] = 'mysql:/etc/postfix/mysql-virtual-ali
 # this enforces tls for sending/receiving emails, but some sites, like github, don't support sending emails
 # via starttls... so, disable it if you want better compatibility, and enable it for improved security
 default['postfix']['smtpd_enforce_tls'] = 'yes' # change to no for better compatibility
-default['postfix']['smtp_enforce_tls'] = node['postfix']['smtpd_enforce_tls']
-default['postfix']['smtpd_tls_security_level'] = 'encrypt' # change it to 'maybe' for better compatibility
-default['postfix']['smtp_tls_security_level'] = node['postfix']['smtpd_tls_security_level']
+default['postfix']['smtp_enforce_tls'] = 'no'
+default['postfix']['smtpd_tls_security_level'] = 'encrypt' 
+default['postfix']['smtp_tls_security_level'] = 'may' # change it to 'encrypt' to force STARTTLS among servers
