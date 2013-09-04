@@ -694,8 +694,6 @@ smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
 smtpd_sasl_auth_enable = yes
 
-smtpd_enforce_tls = <%= node['postfix']['smtpd_enforce_tls'] %>
-smtp_enforce_tls = <%= node['postfix']['smtp_enforce_tls'] %>
 smtpd_tls_security_level = <%= node['postfix']['smtpd_tls_security_level'] %>
 smtp_tls_security_level = <%= node['postfix']['smtp_tls_security_level'] %>
 
